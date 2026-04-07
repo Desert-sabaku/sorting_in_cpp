@@ -1,30 +1,31 @@
-#include <greeter/greeter.h>
-#include <greeter/version.h>
+#include <sorting/sorting.h>
+#include <sorting/version.h>
 
 #include <cxxopts.hpp>
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 auto main(int argc, char** argv) -> int {
-  const std::unordered_map<std::string, greeter::LanguageCode> languages{
-      {"en", greeter::LanguageCode::EN},
-      {"de", greeter::LanguageCode::DE},
-      {"es", greeter::LanguageCode::ES},
-      {"fr", greeter::LanguageCode::FR},
+  const std::unordered_map<std::string, sorting::Algorithm> algorithms{
+      {"bubble", sorting::Algorithm::BUBBLE},
+      {"selection", sorting::Algorithm::SELECTION},
+      {"insertion", sorting::Algorithm::INSERTION},
   };
 
-  cxxopts::Options options(*argv, "A program to welcome the world!");
+  cxxopts::Options options(*argv, "A program to sort a list of integers!");
 
-  std::string language;
-  std::string name;
+  std::string algorithm;
+  std::string input;
 
   // clang-format off
   options.add_options()
     ("h,help", "Show help")
     ("v,version", "Print the current version number")
-    ("n,name", "Name to greet", cxxopts::value(name)->default_value("World"))
-    ("l,lang", "Language code to use", cxxopts::value(language)->default_value("en"))
+    ("i,input", "Comma-separated list of integers to sort", cxxopts::value(input)->default_value("5,3,1,4,2"))
+    ("a,algo", "Sorting algorithm (bubble, selection, insertion)", cxxopts::value(algorithm)->default_value("bubble"))
   ;
   // clang-format on
 
@@ -36,18 +37,34 @@ auto main(int argc, char** argv) -> int {
   }
 
   if (result["version"].as<bool>()) {
-    std::cout << "Greeter, version " << GREETER_VERSION << std::endl;
+    std::cout << "Sorting, version " << SORTING_VERSION << std::endl;
     return 0;
   }
 
-  auto langIt = languages.find(language);
-  if (langIt == languages.end()) {
-    std::cerr << "unknown language code: " << language << std::endl;
+  auto algoIt = algorithms.find(algorithm);
+  if (algoIt == algorithms.end()) {
+    std::cerr << "unknown algorithm: " << algorithm << std::endl;
     return 1;
   }
 
-  greeter::Greeter greeter(name);
-  std::cout << greeter.greet(langIt->second) << std::endl;
+  std::vector<int> data;
+  std::istringstream ss(input);
+  std::string token;
+  while (std::getline(ss, token, ',')) {
+    try {
+      data.push_back(std::stoi(token));
+    } catch (const std::exception&) {
+      std::cerr << "invalid integer value: " << token << std::endl;
+      return 1;
+    }
+  }
+
+  auto sorted = sorting::Sorter::sort(data, algoIt->second);
+  for (std::size_t i = 0; i < sorted.size(); ++i) {
+    if (i > 0) std::cout << " ";
+    std::cout << sorted[i];
+  }
+  std::cout << std::endl;
 
   return 0;
 }

@@ -1,18 +1,17 @@
-[![Actions Status](https://github.com/TheLartians/ModernCppStarter/workflows/MacOS/badge.svg)](https://github.com/TheLartians/ModernCppStarter/actions)
-[![Actions Status](https://github.com/TheLartians/ModernCppStarter/workflows/Windows/badge.svg)](https://github.com/TheLartians/ModernCppStarter/actions)
-[![Actions Status](https://github.com/TheLartians/ModernCppStarter/workflows/Ubuntu/badge.svg)](https://github.com/TheLartians/ModernCppStarter/actions)
-[![Actions Status](https://github.com/TheLartians/ModernCppStarter/workflows/Style/badge.svg)](https://github.com/TheLartians/ModernCppStarter/actions)
-[![Actions Status](https://github.com/TheLartians/ModernCppStarter/workflows/Install/badge.svg)](https://github.com/TheLartians/ModernCppStarter/actions)
-[![codecov](https://codecov.io/gh/TheLartians/ModernCppStarter/branch/master/graph/badge.svg)](https://codecov.io/gh/TheLartians/ModernCppStarter)
+[![Actions Status](https://github.com/Desert-sabaku/sorting_in_cpp/workflows/MacOS/badge.svg)](https://github.com/Desert-sabaku/sorting_in_cpp/actions)
+[![Actions Status](https://github.com/Desert-sabaku/sorting_in_cpp/workflows/Windows/badge.svg)](https://github.com/Desert-sabaku/sorting_in_cpp/actions)
+[![Actions Status](https://github.com/Desert-sabaku/sorting_in_cpp/workflows/Ubuntu/badge.svg)](https://github.com/Desert-sabaku/sorting_in_cpp/actions)
+[![Actions Status](https://github.com/Desert-sabaku/sorting_in_cpp/workflows/Style/badge.svg)](https://github.com/Desert-sabaku/sorting_in_cpp/actions)
+[![Actions Status](https://github.com/Desert-sabaku/sorting_in_cpp/workflows/Install/badge.svg)](https://github.com/Desert-sabaku/sorting_in_cpp/actions)
+[![codecov](https://codecov.io/gh/Desert-sabaku/sorting_in_cpp/branch/master/graph/badge.svg)](https://codecov.io/gh/Desert-sabaku/sorting_in_cpp)
 
 <p align="center">
   <img src="https://repository-images.githubusercontent.com/254842585/4dfa7580-7ffb-11ea-99d0-46b8fe2f4170" height="175" width="auto" />
 </p>
 
-# ModernCppStarter
+# sorting_in_cpp
 
-Setting up a new C++ project usually requires a significant amount of preparation and boilerplate code, even more so for modern C++ projects with tests, executables and continuous integration.
-This template is the result of learnings from many previous projects and should help reduce the work required to setup up a modern C++ project.
+A C++ library implementing common sorting algorithms (bubble sort, selection sort, insertion sort), built with the [ModernCppStarter](https://github.com/TheLartians/ModernCppStarter) template.
 
 ## Features
 
@@ -54,10 +53,7 @@ Use the following command to build and run the executable target.
 ```bash
 cmake -S standalone -B build/standalone
 cmake --build build/standalone
-./build/standalone/Greeter --help
-```
-
-### Build and run test suite
+./build/standalone/Sorting --help
 
 Use the following commands from the project's root directory to run the test suite.
 
@@ -67,7 +63,7 @@ cmake --build build/test
 CTEST_OUTPUT_ON_FAILURE=1 cmake --build build/test --target test
 
 # or simply call the executable: 
-./build/test/GreeterTests
+./build/test/SortingTests
 ```
 
 To collect code coverage information, run CMake with the `-DENABLE_TEST_COVERAGE=1` option.
@@ -118,11 +114,11 @@ cmake -S all -B build
 cmake --build build
 
 # run tests
-./build/test/GreeterTests
+./build/test/SortingTests
 # format code
 cmake --build build --target fix-format
 # run standalone
-./build/standalone/Greeter --help
+./build/standalone/Sorting --help
 # build docs
 cmake --build build --target GenerateDocs
 ```

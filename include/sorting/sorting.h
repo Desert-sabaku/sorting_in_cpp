@@ -18,8 +18,7 @@ namespace sorting {
      * @param algo the algorithm to use
      * @return a sorted copy of the vector
      */
-    static std::vector<int> sort(std::vector<int> data,
-                                 Algorithm algo = Algorithm::BUBBLE);
+    static std::vector<int> sort(std::vector<int> data, Algorithm algo = Algorithm::BUBBLE);
   };
 
 }  // namespace sorting
